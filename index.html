@@ -1,0 +1,95 @@
+<!doctype html>
+<html ng-app="purchaseApp">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="style/style.css">
+<script src="/bower_components/angular/angular.min.js"></script>
+<script src="/bower_components/angular-route/angular-route.js"></script>
+<script src="/bower_components/angular-local-storage.js"></script>
+
+<script src="script.js"></script>
+</head>
+<body ng-app="Example">
+        <div ng-controller="purchaseController">
+                <div class="page-header">
+                    <h1> Tenders of Qazaqstan </h1>
+                </div>
+                <div class="panel">
+                    <div class="form-inline one">
+                        <div class="form-group">
+                            <div class="col-md-12">
+                            	<h5>Название</h5>
+                                <input class="form-control" ng-model="text" placeholder = "Название вашей компании" />
+            					<h5>Область применения</h5>
+                                <input class="form-control" list="one" ng-model="Lasttext" placeholder = "Область применения" />
+                                <datalist id="one">
+                                    <option>Машиносторение</option>
+                                    <option>Радиотехника</option>
+                                    <option>Поставка грузов</option>
+                                    <option>Транпортировка груза</option>
+                                    <option>Ремонтные работы</option>
+                                    <option>Оценка ветхих домов</option>
+                                    <option></option>
+                                    
+                                </datalist>
+                                <h5>Наименнование товара</h5>
+                                <input class="form-control" ng-model="product" placeholder = "Наименнование товара" />
+                                <h5>Количество</h5>
+                                <input class="form-control" type="number" ng-model="three" placeholder="Количество">
+                                <h5>Цена</h5>
+                                <input type="number" class="form-control" ng-model="price" placeholder="Цена" />
+                                <hr>
+                                <button class="btn btn-default" ng-click="addItem(text, Lasttext, product, three, price)">Добавить</button>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Название </th>
+                                <th>Область применения</th>
+                                <th>Наименнование товара</th>
+                                <th>Количество</th>
+                                <th>Бюджет</th>
+                                <th>Выбрать</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="item in list.items">
+                                <td>{{item.purchase}}</td>
+                                <td>{{item.bob}}</td>
+                                <td>{{item.product}}</td>
+                                <td>{{item.threee}}</td>
+                                <td>{{item.price}}</td>
+                                
+                                <td><input type="checkbox" ng-model="item.done" /></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+             
+            <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+            <script>
+            var model = {
+                items: [
+              
+                ]
+            };
+            var purchaseApp = angular.module("purchaseApp", []);
+                purchaseApp.controller("purchaseController", function ($scope) {
+                $scope.list = model;
+                $scope.addItem = function (text, Lasttext, product, three, price) {
+                    price = parseFloat(price); // преобразуем введенное значение к числу
+                    if(text != "" && !isNaN(price)) // если текст установлен и введено число, то добавляем
+                    {
+                        $scope.list.items.push({ purchase: text, bob: Lasttext, product: product, threee: three, price: price, done: false });
+                    }
+                }
+            });
+            </script>
+        </div>
+</body>
+</html>
