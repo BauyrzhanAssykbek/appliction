@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Tender</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="style/style.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="angular/angular.min.js"</script>
+  <script src="angular/angular.js"></script>
+  <script src="angular/angular-route.min.js"></script>
+  <script src="angular/angular-route.js"></script>
+  <script src="bower_components/angular-local-storage.js"></script>
+    <script>
+            var app = angular.module("app", ["ngRoute", "LocalStorageModule"]);
+                app.config(['$routeProvider', function($routeProvider) {
+                    $routeProvider
+                    .when('/User', {
+                        templateUrl : 'view/addUser.html'
+                    })
+                    .when('/Tender', {
+                        templateUrl : 'view/addTender.html'
+                    })
+                    .when('/Table', {
+                        templateUrl : 'view/table.html'
+                    })
+                    .otherwise({
+                            redirectTo: 'index.html'
+                    })
+               .config(function (localStorageServiceProvider) {
+                    localStorageServiceProvider
+                        .setPrefix('app')
+                        .setStorageType('sessionStorage')
+                        .setNotify(true, true)
+                    });    
+                }
+                // .controller("mainController", function(localStorageService) {
+                //     if (localStorageService.get("message") != null) {
+                //     $scope.users = localStorageService.get("message");
+                //     } else {
+                //         $scope.Tenders = [];
+                //         localStorageService.set("message", $scope.Tenders)
+                //     }
+                // })
+                // .controller("createTender",function($scope, localStorageService){
+                //     var self = $scope;
+                //     var Tenders = localStorageService.get("message");
+                //     function TenderClass(name)
+
+                // };
+
+                                    
+            ]);
+            var model = {
+                items: []
+            };  
+                app.controller("ExampleController", function ($scope,localStorageServiceProvider) {
+                $scope.list = model;
+                $scope.addItem = function (text, Lasttext, product, three, price) {
+                    price = parseFloat(price); // преобразуем введенное значение к числу
+                    if(text != "" && !isNaN(price)) // если текст установлен и введено число, то добавляем
+                    {
+                        $scope.list.items.push({ purchase: text, bob: Lasttext, product: product, threee: three, price: price, done: false });
+                        localStorageServiceProvider.set("message", $scope.list.items)
+
+                    }
+
+                }
+                $scope.delete = function(item){
+                    var index = $scope.list.items.indexOf(item);
+                    $scope.list.items.splice(index,1);
+
+                };
+               
+                // $scope.create = function() { 
+                //     $scope.newItem.id = $scope.list.items.length + 1; 
+                //     $scope.items.push($scope.newItem); 
+                //     $scope.newItem = null; 
+                // };
+                });
+                
+    </script>
+
+</head>
+<body ng-app="app">
+        <div ng-controller="ExampleController"
+            <nav class="navbar navbar-default" role="navigation">
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="index.html">Главное меню</a></li>
+                        <li><a href="#!User">Админ</a></li>
+                        <li><a href="#!Tender">Склад</a></li>
+                        <li><a href="#!Table">Список</a></li>
+                    </ul>
+                </div>
+                <div ng-view></div>
+            </nav>
+        </div>
+
+
+
+        
+        <!-- 
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Название </th>
+                        <th>Область применения</th> 
+                        <th>Наименнование товара</th>
+                        <th>Количество</th>
+                        <th>Бюджет</th>
+                        <th>Выбрать</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in list.items">
+                        <td>{{item.purchase}}</td>
+                        <td>{{item.bob}}</td>
+                        <td>{{item.product}}</td>
+                        <td>{{item.threee}}</td>
+                        <td>{{item.price}}</td>                            
+                        <td><a class='btn btn-danger' href='' ng-click='delete(client)'> Delete </a></td>                     
+                    </tr>
+                </tbody>
+            </table> -->
+            
+    
+
+</body>
+</html>

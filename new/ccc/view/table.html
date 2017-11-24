@@ -1,0 +1,28 @@
+<div ng-app="app" ng-controller="ExampleController">
+		<h3>Таблица тендеров</h3>
+		<table class="table table-striped">
+	                <thead>
+	                    <tr>
+	                        <th>Название </th>
+	                        <th>Область применения</th> 
+	                        <th>Наименнование товара</th>
+	                        <th>Количество</th>
+	                        <th>Бюджет</th>
+	                        <th>Выбрать</th>
+	                        <th></th>
+	                    </tr>
+	                </thead>
+	                <tbody>
+	                    <tr ng-repeat="item in list.items">
+	                        <td>{{item.purchase}}</td>
+	                        <td>{{item.bob}}</td>
+	                        <td>{{item.product}}</td>
+	                        <td>{{item.threee}}</td>
+	                        <td>{{item.price}}</td>                           
+	                        <td><a class='btn btn-danger' href='' ng-click='delete(client)'> Delete </a></td>                     
+	                    </tr>
+	                </tbody>
+	    </table>
+	    <h3>Список пользователей</h3>
+
+</div>
